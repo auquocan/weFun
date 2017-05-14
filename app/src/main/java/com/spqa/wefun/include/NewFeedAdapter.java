@@ -1,5 +1,10 @@
 package com.spqa.wefun.include;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -8,11 +13,17 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
+import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Toast;
+import android.util.DisplayMetrics;
 
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
@@ -23,6 +34,9 @@ import com.spqa.wefun.fragment.Fragment_Home;
 import com.spqa.wefun.listener.OnLoadMoreListener;
 import com.spqa.wefun.object.NewFeeds;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
 //import com.transitionseverywhere.extra.Scale;
 
 /**
@@ -90,7 +104,7 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof UserViewHolder) {
-            NewFeeds newFeeds = Fragment_Home.feedItems_List.get(position);
+            final NewFeeds newFeeds = Fragment_Home.feedItems_List.get(position);
             final UserViewHolder userViewHolder = (UserViewHolder) holder;
             userViewHolder.tvContent.setText(newFeeds.getContent());
 
@@ -119,29 +133,45 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         ScaleAnimation animation = new ScaleAnimation(0.2f, 1f, 0.2f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                         animation.setDuration(300);
                         userViewHolder.imgLike.setAnimation(animation);
-                       // userViewHolder.imgLike.setBackgroundResource(R.drawable.like);
+                        // userViewHolder.imgLike.setBackgroundResource(R.drawable.like);
                         userViewHolder.imgLike.setImageResource(R.drawable.like);
                         userViewHolder.imgLike.setTag(1);
                     }
-                  //  userViewHolder.imgLike.setImageResource(R.drawable.liked);
+                    //  userViewHolder.imgLike.setImageResource(R.drawable.liked);
 
 
                 }
             });
 
 
-            DrawableRequestBuilder<String> thumbnailRequest = Glide
-                    .with( userViewHolder.itemFeedView.getContext() )
-                    .load( "https://media.giphy.com/media/l2JhBOWhKWH7n4c6I/giphy.gif" );
+//test load GIF by WEbview
+//            Picasso.with(userViewHolder.itemFeedView.getContext()).load("http://gifspace.net/image/aRP4k.gif").into(userViewHolder.imgFeed);
+////            userViewHolder.imgFeed.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+//////                    userViewHolder.webViewGIF.setVisibility(View.VISIBLE);
+//////                    userViewHolder.webViewGIF.loadUrl("http://gifspace.net/image/aRP4k.gif");
+////                    userViewHolder.imgFeed.setVisibility(View.INVISIBLE);
+////                }
+////            });
 
-            userViewHolder.webViewGIF.loadUrl("http://gifspace.net/image/aRP4k.gif");
+            //webview
+//            userViewHolder.webViewGIF.loadUrl("http://gifspace.net/image/aRP4k.gif");
+//        userViewHolder.webViewGIF.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                userViewHolder.webViewGIF.setVisibility(View.INVISIBLE);
+//                userViewHolder.imgFeed.setVisibility(View.VISIBLE);
+//                return false;
+//            }
+//        });
 
-            //Set GIF
-//            Glide.with(userViewHolder.itemFeedView.getContext())
-//                    .load("https://media.giphy.com/media/l2JhBOWhKWH7n4c6I/giphy.gif")
-//                    .thumbnail(0.05f)
-//                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-//                    .into(new GlideDrawableImageViewTarget(userViewHolder.imgFeed))
+//            String linkImage = "http://gifspace.net/image/aRP4k.gif";
+//            //Set GIF
+//           Glide.with(userViewHolder.itemFeedView.getContext())
+//                    .load(linkImage)
+//                   .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                   .into(new GlideDrawableImageViewTarget(userViewHolder.imgFeed))
             //
             ;
 //            Glide.with(userViewHolder.itemFeedView.getContext())
@@ -149,10 +179,112 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    .asGif().placeholder(R.drawable.liked).crossFade()
 //                    .into(userViewHolder.imgFeed);
 
-//            // Set Image
-//            String linkImage = "https://scontent.fsgn5-2.fna.fbcdn.net/v/t31.0-8/s960x960/14361354_1329888960362351_7640614371886677007_o.jpg?oh=f9947b52a138e293f5e2533c8117ed81&oe=597C8CF5";
-//            Picasso.with(userViewHolder.itemFeedView.getContext()).load(linkImage).into(userViewHolder.imgFeed);
-           // userViewHolder.tvEmailId.setText(newFeeds.getEmail());
+
+            final String linkImage = "http://gifspace.net/image/aRP4k.gif";
+
+
+            // Set Image
+
+            //Picasso.with(userViewHolder.itemFeedView.getContext()).load(linkImage).into(userViewHolder.imgFeed);
+            Picasso.with(userViewHolder.itemFeedView.getContext()).load(linkImage).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    int width = bitmap.getWidth();
+                    int height = bitmap.getHeight();
+                    userViewHolder.imgFeed.setImageBitmap(bitmap);
+
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+                    //xử lý lỗi nếu ko load thành công image
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                }
+            });
+
+            userViewHolder.imgFeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    userViewHolder.imgFeed.setVisibility(View.INVISIBLE);
+                    //webview
+                    userViewHolder.webViewGIF.setVisibility(View.VISIBLE);
+
+                    // Display display= ((Activity)userViewHolder.itemFeedView.getContext()).getWindowManager().getDefaultDisplay();
+
+
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    ((Activity)userViewHolder.itemFeedView.getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                    int height = displayMetrics.heightPixels;
+                    int width = displayMetrics.widthPixels;
+
+
+                    float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+                    float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+
+
+
+//                    Point displaySize = new Point();
+//                    ((Activity) userViewHolder.itemFeedView.getContext()).getWindowManager().getDefaultDisplay().getRealSize(displaySize);
+//
+//                    Rect windowSize = new Rect();
+//                    ((Activity) userViewHolder.itemFeedView.getContext()).getWindow().getDecorView().getWindowVisibleDisplayFrame(windowSize);
+//
+//                    int width = displaySize.x - Math.abs(windowSize.width());
+//                    int height = displaySize.y - Math.abs(windowSize.height());
+
+                    Toast.makeText(userViewHolder.itemFeedView.getContext(), dpHeight + "test width: " + dpWidth, Toast.LENGTH_SHORT).show();
+//                    Display display = new Display();
+//                    ((Activity)userViewHolder.itemFeedView.getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//                    int height = displayMetrics.heightPixels;
+//                    int width = displayMetrics.widthPixels;
+
+                    String url = "http://gifspace.net/image/aRP4k.gif";
+
+                    String data = "<html><head><title>Example</title><meta name=\"viewport\"\"content=\"width="+dpWidth+", initial-scale=0.65 \" /></head>";
+                    data = data + "<body><center><img width=\""+dpWidth+"\" src=\"" + url + "\" /></center></body></html>";
+
+
+
+
+                    userViewHolder.webViewGIF.loadData(data, "text/html", "utf-8");
+
+
+//                    userViewHolder.webViewGIF.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+//                    userViewHolder.webViewGIF.loadUrl("http://gifspace.net/image/aRP4k.gif");
+//                    userViewHolder.webViewGIF.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+//                    userViewHolder.webViewGIF.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Toast.makeText(userViewHolder.itemFeedView.getContext(), "OK    ", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                    userViewHolder.webViewGIF.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            Toast.makeText(userViewHolder.itemFeedView.getContext(), "OK    ", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                    });
+
+
+//                    String html = "<html><body> <img src=\"" + linkImage + "\" width=\"100%\" height=\"100%\"\"/>  </body></html>";
+//                    userViewHolder.webViewGIF.loadData(html, "text/html", null);
+//                    userViewHolder.webViewGIF.setOnTouchListener(new View.OnTouchListener() {
+//                        @Override
+//                        public boolean onTouch(View v, MotionEvent event) {
+//                            userViewHolder.webViewGIF.setVisibility(View.INVISIBLE);
+//                            userViewHolder.imgFeed.setVisibility(View.VISIBLE);
+//                            return false;
+//                        }
+//                    });
+
+                }
+            });
+            // userViewHolder.tvEmailId.setText(newFeeds.getEmail());
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
@@ -161,8 +293,8 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-       return Fragment_Home.feedItems_List == null ? 0 : Fragment_Home.feedItems_List.size();
-       // return 10;
+        return Fragment_Home.feedItems_List == null ? 0 : Fragment_Home.feedItems_List.size();
+        // return 10;
     }
 
     public void setLoaded() {

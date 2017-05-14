@@ -35,27 +35,58 @@
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
-            <!--<ImageView-->
+            <RelativeLayout
+                android:id="@+id/contentLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/feed_IMG_caption">
+
+                <ImageView
+                    android:id="@+id/imgFeed"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/real" />
+
+                <!--<pl.droidsonroids.gif.GifImageView-->
+
                 <!--android:id="@+id/imgFeed"-->
                 <!--android:layout_width="fill_parent"-->
                 <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@id/feed_IMG_caption"-->
                 <!--android:layout_centerInParent="true"-->
                 <!--android:layout_marginBottom="5dp"-->
                 <!--android:layout_marginTop="5dp"-->
-                <!--android:adjustViewBounds="true"-->
-                <!--android:src="@drawable/real"/>-->
-            <WebView
-                android:id="@+id/webViewGIF"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/feed_IMG_caption"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:adjustViewBounds="true"
-                >
-            </WebView>
+                <!--android:adjustViewBounds="true" />-->
+
+                <WebView
+                    android:id="@+id/webViewGIF"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:adjustViewBounds="true"
+                    android:visibility="invisible"></WebView>
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="okokok"-->
+                <!--android:layout_toRightOf="@+id/webViewGIF"/>-->
+
+            </RelativeLayout>
+            <!--<ImageView-->
+            <!--android:id="@+id/imgFeed"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/feed_IMG_caption"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:src="@drawable/real"/>-->
 
 
             <LinearLayout
@@ -69,9 +100,9 @@
                     android:id="@+id/imgLike"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/like"
                     android:onClick="imgLike"
-                    android:tag="1"/>
+                    android:src="@drawable/like"
+                    android:tag="1" />
 
                 <TextView
                     android:id="@+id/txv_Likes"

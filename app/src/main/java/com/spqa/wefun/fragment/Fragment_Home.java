@@ -41,7 +41,7 @@ import butterknife.ButterKnife;
  */
 public class Fragment_Home extends Fragment {
     private static final boolean GRID_LAYOUT = false;
-    private static final int ITEM_COUNT = 3;
+    private static final int ITEM_COUNT = 1;
     private SwipeRefreshLayout swipeContainer;
     public static final List<NewFeeds> feedItems_List = new ArrayList<>();
     //  TextView textTest;

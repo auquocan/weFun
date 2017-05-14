@@ -18,12 +18,13 @@ class UserViewHolder extends RecyclerView.ViewHolder {
     public View itemFeedView;
     public ImageView imgLike;
     public WebView webViewGIF;
+
     public UserViewHolder(View itemView) {
         super(itemView);
         tvContent = (TextView) itemView.findViewById(R.id.feed_IMG_caption);
         itemFeedView = itemView;
-        webViewGIF = (WebView)itemView.findViewById(R.id.webViewGIF);
-       // imgFeed = (ImageView) itemView.findViewById(R.id.imgFeed);
+        webViewGIF = (WebView) itemView.findViewById(R.id.webViewGIF);
+        imgFeed = (ImageView) itemView.findViewById(R.id.imgFeed);
         imgLike = (ImageView) itemView.findViewById(R.id.imgLike);
     }
 }
