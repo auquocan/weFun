@@ -180,7 +180,7 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    .into(userViewHolder.imgFeed);
 
 
-            final String linkImage = "http://gifspace.net/image/aRP4k.gif";
+            final String linkImage = "https://media.giphy.com/media/l0Iy9g9pvspPyJIju/giphy.gif";
 
 
             // Set Image
@@ -241,15 +241,15 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    ((Activity)userViewHolder.itemFeedView.getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 //                    int height = displayMetrics.heightPixels;
 //                    int width = displayMetrics.widthPixels;
+                    //"http://gifspace.net/image/aRP4k.gif"
+                    String url = "https://media.giphy.com/media/l0Iy9g9pvspPyJIju/giphy.gif";
 
-                    String url = "http://gifspace.net/image/aRP4k.gif";
+//                    String data = "<html><head><meta name=\"viewport\"\"content=\"width="+dpWidth+" \" /></head>";
+//                    data = "<html><body><img width=\""+dpWidth+"\" src=\"" + url + "\"  style=\"margin:50px 0px\"/></body></html>";
 
-                    String data = "<html><head><title>Example</title><meta name=\"viewport\"\"content=\"width="+dpWidth+", initial-scale=0.65 \" /></head>";
-                    data = data + "<body><center><img width=\""+dpWidth+"\" src=\"" + url + "\" /></center></body></html>";
+                    //String html = "<html><body><img src=\"" + url + "\" width="+dpWidth+"  "/></body></html>";
 
-
-
-
+                    String data="<img src="+url+" style='width:"+dpWidth+"px; margin-left:-6pt' />";
                     userViewHolder.webViewGIF.loadData(data, "text/html", "utf-8");
 
 
@@ -262,14 +262,21 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                            Toast.makeText(userViewHolder.itemFeedView.getContext(), "OK    ", Toast.LENGTH_SHORT).show();
 //                        }
 //                    });
-                    userViewHolder.webViewGIF.setOnTouchListener(new View.OnTouchListener() {
+//                    userViewHolder.webViewGIF.setOnTouchListener(new View.OnTouchListener() {
+//                        @Override
+//                        public boolean onTouch(View v, MotionEvent event) {
+//                            Toast.makeText(userViewHolder.itemFeedView.getContext(), "OK    ", Toast.LENGTH_SHORT).show();
+//                            return true;
+//                        }
+//                    });
+
+
+                    userViewHolder.webViewGIF.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            Toast.makeText(userViewHolder.itemFeedView.getContext(), "OK    ", Toast.LENGTH_SHORT).show();
-                            return true;
+                        public void onClick(View v) {
+                            Toast.makeText(userViewHolder.itemFeedView.getContext(), "OKOK click", Toast.LENGTH_SHORT).show();
                         }
                     });
-
 
 //                    String html = "<html><body> <img src=\"" + linkImage + "\" width=\"100%\" height=\"100%\"\"/>  </body></html>";
 //                    userViewHolder.webViewGIF.loadData(html, "text/html", null);
