@@ -8,12 +8,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.share.model.ShareLinkContent;
@@ -22,6 +28,8 @@ import com.spqa.materialviewpager.MaterialViewPager;
 import com.spqa.materialviewpager.header.HeaderDesign;
 import com.spqa.wefun.fragment.Fragment_Home;
 import com.spqa.wefun.fragment.ScrollFragment;
+import com.spqa.wefun.include.AppController;
+import com.spqa.wefun.include.Const;
 import com.spqa.wefun.include.DownloadImage;
 import com.spqa.wefun.include.DrawerActivity;
 import com.spqa.wefun.fragment.RecyclerViewFragment;
@@ -125,11 +133,19 @@ public class MainActivity extends DrawerActivity {
                 public void onClick(View v) {
                     mViewPager.notifyHeaderChanged();
                     Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
+
                 }
             });
         }
 
     }
+
+    /**
+     * Making json object request
+     * */
+
+
+}
 //    public void fetchTimelineAsync(int page) {
 //        // Send the network request to fetch the updated data
 //        // `client` here is an instance of Android Async HTTP
@@ -150,7 +166,7 @@ public class MainActivity extends DrawerActivity {
 //            }
 //        });
 //    }
-}
+
 
 //public class MainActivity extends AppCompatActivity {
 //    private ShareDialog shareDialog;

@@ -1,7 +1,6 @@
 package com.spqa.wefun.object;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,10 +9,10 @@ import java.util.Date;
 
 public class NewFeeds {
     private  int ID;
-    private int TypeFeed;
+    private int TypePost;
     private String Link;
     private String UserID;
-    private String Content;
+    private String Caption;
     private int Likes;
     private int Comments;
     private int Status;
@@ -24,8 +23,8 @@ public class NewFeeds {
         return ID;
     }
 
-    public int getTypeFeed() {
-        return TypeFeed;
+    public int getTypePost() {
+        return TypePost;
     }
 
     public String getLink() {
@@ -36,8 +35,8 @@ public class NewFeeds {
         return UserID;
     }
 
-    public String getContent() {
-        return Content;
+    public String getCaption() {
+        return Caption;
     }
 
     public int getLikes() {
@@ -60,8 +59,8 @@ public class NewFeeds {
         this.ID = ID;
     }
 
-    public void setTypeFeed(int typeFeed) {
-        TypeFeed = typeFeed;
+    public void setTypePost(int typePost) {
+        TypePost = typePost;
     }
 
     public void setLink(String link) {
@@ -72,8 +71,8 @@ public class NewFeeds {
         UserID = userID;
     }
 
-    public void setContent(String content) {
-        Content = content;
+    public void setCaption(String caption) {
+        Caption = caption;
     }
 
     public void setLikes(int likes) {

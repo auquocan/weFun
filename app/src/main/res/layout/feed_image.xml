@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/feed_IMG_caption"
+                android:id="@+id/feed_caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -39,7 +39,7 @@
                 android:id="@+id/contentLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/feed_IMG_caption">
+                android:layout_below="@id/feed_caption">
 
                 <ImageView
                     android:id="@+id/imgFeed"
@@ -50,7 +50,16 @@
                     android:layout_marginTop="5dp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/real" />
-
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/gifView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/testgif"
+                    />
                 <!--<pl.droidsonroids.gif.GifImageView-->
 
                 <!--android:id="@+id/imgFeed"-->

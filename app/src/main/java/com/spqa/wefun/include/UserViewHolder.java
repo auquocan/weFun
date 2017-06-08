@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.spqa.wefun.R;
 
+import pl.droidsonroids.gif.GifImageButton;
+import pl.droidsonroids.gif.GifImageView;
+
 /**
  * Created by MyPC on 24/04/2017.
  */
@@ -18,13 +21,15 @@ class UserViewHolder extends RecyclerView.ViewHolder {
     public View itemFeedView;
     public ImageView imgLike;
     public WebView webViewGIF;
+    public GifImageView gifView;
 
     public UserViewHolder(View itemView) {
         super(itemView);
-        tvContent = (TextView) itemView.findViewById(R.id.feed_IMG_caption);
+        tvContent = (TextView) itemView.findViewById(R.id.feed_caption);
         itemFeedView = itemView;
         webViewGIF = (WebView) itemView.findViewById(R.id.webViewGIF);
         imgFeed = (ImageView) itemView.findViewById(R.id.imgFeed);
         imgLike = (ImageView) itemView.findViewById(R.id.imgLike);
+        gifView = (GifImageView) itemView.findViewById(R.id.gifView);
     }
 }
