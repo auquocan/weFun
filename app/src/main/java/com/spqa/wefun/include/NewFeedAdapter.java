@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.util.DisplayMetrics;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -24,6 +25,14 @@ import com.spqa.wefun.listener.OnLoadMoreListener;
 import com.spqa.wefun.object.NewFeeds;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
+import pl.droidsonroids.gif.GifDrawable;
 //import com.transitionseverywhere.extra.Scale;
 
 /**
@@ -172,14 +181,31 @@ public class NewFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             final String linkImage = "https://media.giphy.com/media/l0Iy9g9pvspPyJIju/giphy.gif";
             switch (newFeeds.getTypePost()) {
                 case 1:
-                    userViewHolder.gifView.setVisibility(View.GONE);
-                    userViewHolder.imgFeed.setVisibility(View.VISIBLE);
+                    userViewHolder.gifView.setVisibility(View.VISIBLE);
+                    userViewHolder.imgFeed.setVisibility(View.INVISIBLE);
 //                    Picasso.with(userViewHolder.itemFeedView.getContext()).load(newFeeds.getLink()).into(userViewHolder.imgFeed);
+                    //InputStream (it must support marking)
 
-                    Glide.with(userViewHolder.itemFeedView.getContext())
-                            .load("http://gifspace.net/image/aRP4k.gif")
+                    try {
+                        String sourceIs = "http://s2.cdn.xiachufang.com/9748367af81b11e6bc9d0242ac110002_350w_262h.gif?imageView2/2/w/200/interlace/1/q/90/format/gif/.gif";
+                        InputStream stream = new ByteArrayInputStream(sourceIs.getBytes(StandardCharsets.UTF_8));
+                        BufferedInputStream bis = new BufferedInputStream( stream , 100 );
+                        GifDrawable gifFromStream = new GifDrawable(bis);
+                        userViewHolder.gifView.setImageDrawable(gifFromStream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                            .into(new GlideDrawableImageViewTarget(userViewHolder.imgFeed));
+
+//                    Glide.with(userViewHolder.itemFeedView.getContext())
+//                            .load("http://s2.cdn.xiachufang.com/9748367af81b11e6bc9d0242ac110002_350w_262h.gif?imageView2/2/w/200/interlace/1/q/90/format/gif/.gif")
+//                            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                            .crossFade(500)
+//                            .into(userViewHolder.gifView);
+//                    Glide.with(userViewHolder.itemFeedView.getContext())
+//                            .load("http://gifspace.net/image/aRP4k.gif")
+//
+//                            .into(new GlideDrawableImageViewTarget(userViewHolder.gifView));
 //                    Glide.with(userViewHolder.itemFeedView.getContext())
 //                            .load("https://media.giphy.com/media/l0Iy9g9pvspPyJIju/giphy.gif")
 //                            .asGif().crossFade()
